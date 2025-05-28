@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,10 +11,9 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'Generated App',
       theme: new ThemeData(
-        primarySwatch: Colors.purple,
-        primaryColor: const Color(0xFF9c27b0),
+        primarySwatch: Colors.blue,
+        primaryColor: const Color(0xFF2196f3),
         canvasColor: const Color(0xFFfafafa),
-        fontFamily: 'Roboto',
       ),
       home: new MyHomePage(),
     );
@@ -27,45 +27,53 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-    @override
-    Widget build(BuildContext context) {
-      return new Scaffold(
-        appBar: new AppBar(
-          title: new Text('App Name'),
-          ),
-        body:
-          new Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              new Text(
-              "One",
-                style: new TextStyle(fontSize:32.0,
-                color: const Color(0xFF000000),
-                fontWeight: FontWeight.w700,
-                fontFamily: "Roboto"),
+  static var _message = 'ok.';
+  static var _value = 0.0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('App Name'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Text(
+                _message,
+                style: TextStyle(
+                  fontSize: 32.0,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: "Roboto"),
               ),
-    
-              new Text(
-              "Two",
-                style: new TextStyle(fontSize:32.0,
-                color: const Color(0xFF000000),
-                fontWeight: FontWeight.w700,
-                fontFamily: "Roboto"),
-              ),
-    
-              new Text(
-              "Three",
-                style: new TextStyle(fontSize:32.0,
-                color: const Color(0xFF000000),
-                fontWeight: FontWeight.w700,
-                fontFamily: "Roboto"),
-              )
-            ]
-    
-          ),
-    
-      );
-    }
+            ),
+
+            Padding(
+              padding: EdgeInsets.all(10.0),
+            ),
+
+            Slider(
+              onChanged: sliderChanged,
+              min: 0.0,
+              max: 100.0,
+              divisions: 20,
+              value:_value,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void sliderChanged(double value){
+    setState(() {
+      _value = value.floorToDouble();
+      _message = 'set value: $_value';
+    });
+  }
 }
