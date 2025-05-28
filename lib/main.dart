@@ -28,7 +28,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   static var _message = 'ok.';
-  static var _value = 0.0;
+  static var _janken = <String>['グー', 'チョキ', 'パー'];
 
   @override
   Widget build(BuildContext context) {
@@ -52,28 +52,29 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontFamily: "Roboto"),
               ),
             ),
-
-            Padding(
-              padding: EdgeInsets.all(10.0),
-            ),
-
-            Slider(
-              onChanged: sliderChanged,
-              min: 0.0,
-              max: 100.0,
-              divisions: 20,
-              value:_value,
-            ),
-          ],
+            TextButton(
+              onPressed: buttonPressed,
+              child: Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  "Push me!",
+                  style: TextStyle(
+                    fontSize: 32.0,
+                    color: const Color(0xff000000),
+                    fontWeight: FontWeight.w400,
+                    fontFamily: "Roboto"),
+                )
+              )
+            )
+          ]
         ),
       ),
     );
   }
 
-  void sliderChanged(double value){
+  void buttonPressed() {
     setState(() {
-      _value = value.floorToDouble();
-      _message = 'set value: $_value';
+      _message = (_janken..shuffle()).first;
     });
   }
 }
