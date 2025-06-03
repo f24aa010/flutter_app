@@ -28,7 +28,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   static var _message = 'ok.';
-  static var _janken = <String>['グー', 'チョキ', 'パー'];
 
   @override
   Widget build(BuildContext context) {
@@ -52,29 +51,38 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontFamily: "Roboto"),
               ),
             ),
-            TextButton(
-              onPressed: buttonPressed,
-              child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Text(
-                  "Push me!",
-                  style: TextStyle(
-                    fontSize: 32.0,
+
+            Padding(
+              padding: EdgeInsets.all(10.0),
+            ),
+
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: ElevatedButton(
+                onPressed:buttonPressed,
+              child: Text(
+                  "tap me!",
+                  style: TextStyle(fontSize:32.0,
                     color: const Color(0xff000000),
                     fontWeight: FontWeight.w400,
                     fontFamily: "Roboto"),
                 )
               )
-            )
-          ]
+            ),
+          ],
         ),
       ),
     );
   }
 
-  void buttonPressed() {
-    setState(() {
-      _message = (_janken..shuffle()).first;
-    });
+  void buttonPressed(){
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text("Hello!"),
+          content: Text("This is sample."),
+        )
+    );
   }
 }
+
